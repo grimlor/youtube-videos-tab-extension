@@ -2,7 +2,9 @@
 
 ## Overview
 
-This guide establishes testing standards for the Abbott Auto project using Behavior-Driven Development (BDD) principles. Tests should be clear, maintainable, and focused on business behavior rather than implementation details.
+This guide establishes testing standards using Behavior-Driven Development (BDD) principles. Tests should be clear, maintainable, and focused on business behavior rather than implementation details.
+
+**Note on Examples:** This guide uses examples from multiple testing frameworks (Python/pytest, TypeScript/Jest) to illustrate BDD principles. The concepts apply universally, but syntax varies by framework—particularly for assertion messages (see [Assertion Quality Standards](#assertion-quality-standards)).
 
 ## Why BDD? Tests as Specification
 
@@ -194,10 +196,32 @@ def test_data_processing_pipeline(self):
 
 ## Assertion Quality Standards
 
-### 1. Always Provide Descriptive Error Messages
+### Framework-Specific Assertion Approaches
 
-Every assertion should include a meaningful error message that helps debug failures without running a debugger.
+**Python (pytest):** Supports custom assertion messages via the second parameter to `assert`:
+```python
+assert condition, "Custom error message"
+```
 
+**TypeScript/Jest:** Does NOT support custom assertion messages in `expect()`. Instead, use:
+- Descriptive test names (`user_does_something_format`)
+- Given-When-Then comments explaining context
+- Jest's built-in failure messages (which are comprehensive)
+
+```typescript
+// ✅ Jest approach: Use comments for context
+// Then: Extension should not activate on non-channel pages
+expect(mockSetTimeout).not.toHaveBeenCalled();
+
+// ❌ Does not work in Jest
+expect(mockSetTimeout).not.toHaveBeenCalled(), "Extension should not activate";
+```
+
+### 1. Always Provide Descriptive Context
+
+Every assertion should include meaningful context that helps debug failures without running a debugger.
+
+**Python/pytest examples:**
 ```python
 # Excellent: Descriptive with context
 assert len(exported_files) == expected_count, (
@@ -213,9 +237,21 @@ assert len(exported_files) == 2
 assert result.is_valid
 ```
 
+**TypeScript/Jest examples:**
+```typescript
+// Good: Context via comments
+// Then: All channel formats should be exported
+expect(exportedFiles.length).toBe(expectedCount);
+expect(exportedFiles).toContain('@username');
+expect(exportedFiles).toContain('/channel/');
+
+// Bad: No context
+expect(exportedFiles.length).toBe(3);
+```
+
 ### 2. Show Expected vs Actual Values
 
-When comparing values, show both what was expected and what was actually received:
+When comparing values, show both what was expected and what was actually received.
 
 ```python
 # Good: Clear expected vs actual

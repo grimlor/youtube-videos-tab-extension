@@ -571,6 +571,28 @@ describe('YouTube Auto Videos Tab Extension', () => {
       expect(mockSetTimeout).not.toHaveBeenCalled();
     });
 
+    test('user_manually_navigates_to_home_tab_extension_respects_choice', () => {
+      /**
+       * As a YouTube user
+       * When I manually navigate to the Home/Featured tab on a channel
+       * Then the extension respects my choice and does NOT auto-switch back to Videos
+       */
+      // Given: User manually navigates to Home tab (featured)
+      const homeTabUrl = 'https://www.youtube.com/@mkbhd/featured';
+      
+      // And: Mock setTimeout to verify it's NOT called
+      const mockSetTimeout = jest.fn() as any;
+
+      // When: Extension observes URL change to /featured
+      switchToVideosTab(homeTabUrl, mockSetTimeout);
+
+      // Then: Extension does not activate
+      expect(mockSetTimeout).not.toHaveBeenCalled();
+      
+      // And: isChannelMainPage correctly identifies /featured as not main page
+      expect(isChannelMainPage(homeTabUrl)).toBe(false);
+    });
+
     test('user_visits_non_youtube_site_extension_does_nothing', () => {
       /**
        * As a web user
