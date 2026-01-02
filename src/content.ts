@@ -9,7 +9,7 @@
  * @param url - The URL to check
  * @returns True if on a channel main page
  */
-export function isChannelMainPage(url: string): boolean {
+function isChannelMainPage(url: string): boolean {
   // Match channel URLs without sub-paths
   const channelPattern = /youtube\.com\/((@[^/]+)|(c\/[^/]+)|(channel\/[^/]+)|(user\/[^/]+))$/;
   return channelPattern.test(url);
@@ -20,7 +20,7 @@ export function isChannelMainPage(url: string): boolean {
  * @param url - The URL to check
  * @returns True if already on Videos tab
  */
-export function isOnVideosTab(url: string): boolean {
+function isOnVideosTab(url: string): boolean {
   return url.includes('/videos');
 }
 
@@ -28,7 +28,7 @@ export function isOnVideosTab(url: string): boolean {
  * Attempts to click the Videos tab in the DOM
  * @returns True if tab was found and clicked
  */
-export function clickVideosTab(): boolean {
+function clickVideosTab(): boolean {
   // Try multiple selectors for the Videos tab
   const selectors = [
     'a[href*="/videos"][role="tab"]',
@@ -53,7 +53,7 @@ export function clickVideosTab(): boolean {
  * @param currentUrl - The current URL
  * @returns The new videos URL
  */
-export function getVideosUrl(currentUrl: string): string {
+function getVideosUrl(currentUrl: string): string {
   return currentUrl + '/videos';
 }
 
@@ -61,7 +61,7 @@ export function getVideosUrl(currentUrl: string): string {
  * Navigates to the Videos tab by modifying window.location
  * @param currentUrl - The current URL to navigate from
  */
-export function navigateToVideosTab(currentUrl: string): void {
+function navigateToVideosTab(currentUrl: string): void {
   const videosUrl = getVideosUrl(currentUrl);
   window.location.href = videosUrl;
   console.log('[YouTube Videos Tab] Navigated to:', videosUrl);
@@ -73,7 +73,7 @@ export function navigateToVideosTab(currentUrl: string): void {
  * @param currentUrl - The current URL
  * @param setTimeoutFn - Optional setTimeout function for testing
  */
-export function switchToVideosTab(
+function switchToVideosTab(
   currentUrl: string,
   setTimeoutFn: typeof setTimeout = setTimeout
 ): void {
@@ -98,6 +98,22 @@ export function switchToVideosTab(
       navigateToVideosTab(currentUrl);
     }, 500);
   }
+}
+
+// Export for testing (only in Node.js environment)
+// @ts-expect-error - module is defined in Node.js/Jest environment
+// eslint-disable-next-line no-undef
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  // @ts-expect-error - module.exports is defined in Node.js/Jest environment
+  // eslint-disable-next-line no-undef
+  module.exports = {
+    isChannelMainPage,
+    isOnVideosTab,
+    clickVideosTab,
+    getVideosUrl,
+    navigateToVideosTab,
+    switchToVideosTab
+  };
 }
 
 // Browser extension execution (only runs in browser)

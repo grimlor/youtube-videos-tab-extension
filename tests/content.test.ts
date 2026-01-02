@@ -4,14 +4,23 @@
  */
 
 // Import the actual implementation to test
-import {
-  isChannelMainPage,
-  isOnVideosTab,
-  getVideosUrl,
-  clickVideosTab,
-  navigateToVideosTab,
-  switchToVideosTab
-} from '../src/content';
+let isChannelMainPage: any;
+let isOnVideosTab: any;
+let getVideosUrl: any;
+let clickVideosTab: any;
+let navigateToVideosTab: any;
+let switchToVideosTab: any;
+
+beforeAll(() => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const content = require('../src/content');
+  isChannelMainPage = content.isChannelMainPage;
+  isOnVideosTab = content.isOnVideosTab;
+  getVideosUrl = content.getVideosUrl;
+  clickVideosTab = content.clickVideosTab;
+  navigateToVideosTab = content.navigateToVideosTab;
+  switchToVideosTab = content.switchToVideosTab;
+});
 
 describe('YouTube Auto Videos Tab Extension', () => {
   

@@ -118,6 +118,169 @@ See [BDD_TESTING_STYLE_GUIDE.md](BDD_TESTING_STYLE_GUIDE.md) for detailed testin
 - Test URL changes via clicking channel links
 - Verify no interference on non-channel pages
 
+## TypeScript in Browser Extensions: Challenges and Solutions
+
+This project uses TypeScript to provide type safety and better tooling support. However, browser extension content scripts have unique constraints that require specific workarounds when combined with TypeScript and Jest testing.
+
+### The Core Problem: ES Modules Don't Work in Content Scripts
+
+Browser extension content scripts (as of 2025) **cannot use ES modules** (import/export statements). They run in the browser's content script environment which expects either:
+- Plain JavaScript with no module system
+- CommonJS-style code loaded via script tags
+
+This conflicts with modern TypeScript development where:
+- TypeScript naturally targets ES modules
+- Jest expects to import functions for testing
+- Type checking works best with explicit exports
+
+### Solution Architecture
+
+We use a hybrid approach that compiles to CommonJS while maintaining full testability:
+
+#### 1. TypeScript Compilation to CommonJS
+
+**tsconfig.json:**
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",  // Not ES2020 or ESNext
+    "target": "ES2020"
+  }
+}
+```
+
+This ensures `dist/content.js` uses `module.exports` which browser content scripts tolerate (they ignore it).
+
+#### 2. Functions Without Export Keywords
+
+**src/content.ts:**
+```typescript
+// No export keyword - just plain function declarations
+function isChannelMainPage(url: string): boolean {
+  // ...
+}
+
+function clickVideosTab(): boolean {
+  // ...
+}
+```
+
+This keeps the code clean and browser-compatible while TypeScript still type-checks everything.
+
+#### 3. Conditional Module Exports for Testing
+
+**src/content.ts (end of file):**
+```typescript
+// Only export in Node.js/Jest environment for testing
+if (typeof module !== 'undefined' && module.exports) {
+  // @ts-expect-error - module.exports not in types, but needed for Jest
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  module.exports = {
+    isChannelMainPage,
+    clickVideosTab,
+    // ... all testable functions
+  };
+}
+```
+
+**Why this works:**
+- In browser: `module` is undefined, this block never runs
+- In Jest/Node: `module.exports` allows tests to import functions
+- Comments silence TypeScript/ESLint complaints about non-standard pattern
+
+#### 4. Dynamic Require in Tests
+
+**tests/content.test.ts:**
+```typescript
+let contentModule: any;
+
+beforeAll(() => {
+  // Dynamic require to avoid TypeScript compile-time import resolution
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  contentModule = require('../src/content');
+});
+
+describe('when user visits YouTube channel', () => {
+  it('user_sees_videos_tab_for_username_format', () => {
+    expect(contentModule.isChannelMainPage('https://www.youtube.com/@mkbhd'))
+      .toBe(true);
+  });
+});
+```
+
+**Why dynamic require?**
+- Static `import` statements cause TypeScript namespace collisions
+- `require()` happens at runtime, after compilation, avoiding conflicts
+- Tests load directly from `src/` ensuring 100% coverage
+
+#### 5. Jest Configuration with isolatedModules
+
+**jest.config.js:**
+```javascript
+transform: {
+  '^.+\\.tsx?$': ['ts-jest', {
+    isolatedModules: true  // Critical: avoid cross-file type checking
+  }]
+}
+```
+
+**Why isolatedModules?**
+- Prevents TypeScript from checking types across test and source files
+- Eliminates namespace collision errors
+- Each file is transformed independently
+
+#### 6. Separate TypeScript Configs
+
+**tsconfig.test.json:**
+```json
+{
+  "extends": "./tsconfig.json",
+  "include": ["tests/**/*"],    // Only test files
+  "exclude": ["src/**/*"]       // Explicitly exclude src/
+}
+```
+
+**Why separate configs?**
+- Tests and source never compiled together
+- Avoids duplicate identifier errors
+- Keeps test and source type checking independent
+
+### Trade-offs and Alternatives
+
+**Is this complexity worth it?**
+
+For a simple extension like this, probably not. The benefits:
+- ✅ Full TypeScript type checking (strict mode)
+- ✅ Better IDE autocomplete and refactoring
+- ✅ Catches errors at compile time
+- ✅ 100% test coverage with real implementation
+
+The costs:
+- ❌ Complex module system workarounds
+- ❌ Non-standard conditional exports pattern
+- ❌ Requires careful configuration of multiple tools
+- ❌ More difficult for contributors to understand
+
+**Better alternative for larger projects:**
+Use a bundler (webpack, rollup, or esbuild) that can:
+- Bundle TypeScript with proper module resolution
+- Handle both browser and test environments cleanly
+- Remove the need for conditional exports
+- Support tree-shaking and code splitting
+
+**For this project:**
+The goal was to demonstrate TypeScript knowledge for job applications. The complexity demonstrated deep understanding of module systems, build tooling, and browser constraints - valuable learning even if over-engineered for the actual problem.
+
+### Key Lessons
+
+1. **Browser extension content scripts are not Node.js** - They can't use standard ES modules
+2. **CommonJS is still relevant in 2025** - Legacy constraints sometimes force legacy solutions  
+3. **Conditional exports are a valid pattern** - When bridging incompatible environments
+4. **Dynamic require() has legitimate uses** - Avoiding compile-time conflicts in tests
+5. **Test real implementation, not mocks** - Even if it requires creative module loading
+
+If building a similar project, evaluate whether TypeScript's benefits outweigh the configuration complexity for your use case.
+
 ## Future Enhancements
 
 - Optional: User settings to enable/disable per-channel

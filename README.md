@@ -41,7 +41,8 @@ A Chromium browser extension that automatically navigates to the Videos tab when
    - Open `chrome://extensions/` (or `edge://extensions/`)
    - Enable "Developer mode"
    - Click "Load unpacked"
-   - Select this directory
+   - Select the **root directory of this project** (where `manifest.json` is located)
+   - The extension will load the compiled `dist/content.js` file
 ```bash
 run build         # Compile TypeScript to JavaScript
 npm run build:watch   # Watch mode for development

@@ -20,7 +20,8 @@ export default {
   moduleFileExtensions: ['ts', 'js'],
   transform: {
     '^.+\\.ts$': ['ts-jest', {
-      tsconfig: 'tsconfig.test.json'
+      tsconfig: 'tsconfig.test.json',
+      isolatedModules: true
     }]
   }
 };
