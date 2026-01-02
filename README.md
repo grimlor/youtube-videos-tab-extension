@@ -104,4 +104,3 @@ This is a personal project. Issues and suggestions welcome!
 ## License
 
 MIT
-
