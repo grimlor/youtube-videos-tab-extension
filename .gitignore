@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+coverage/
+
+# Development/Collaboration
+.copilot/*
+!.copilot/README.md
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Package files
+*.zip
+*.crx
+*.pem
+
+# Node modules (if we add build tooling later)
+node_modules/
