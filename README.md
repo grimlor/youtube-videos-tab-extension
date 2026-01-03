@@ -5,9 +5,13 @@
 
 A Chromium browser extension that automatically navigates to the Videos tab when visiting YouTube channel pages. Built with **TypeScript** for type safety and maintainability.
 
-## Status
+## Demo
 
-✅ **Ready for Testing** - Implementation complete with comprehensive test suite
+**Before:** YouTube lands on the Home tab  
+![Before - Home tab](assets/screenshots/before.png)
+
+**After:** Extension automatically navigates to Videos tab  
+![After - Videos tab](assets/screenshots/after.png)
 
 ## Features
 
