@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Top-left: YouTube-like video play icon (pale) -->
+  <rect x="20" y="20" width="50" height="38" rx="2" fill="#E74C3C" opacity="0.25"/>
+  <polygon points="38,32 38,52 52,42" fill="#E74C3C" opacity="0.3"/>
+  
+  <!-- Bottom-right: Film clapper (overlapping) -->
+  <!-- Clapper board bottom -->
+  <rect x="52" y="68" width="56" height="28" rx="2" fill="#2C3E50"/>
+  
+  <!-- Clapper stick (top part with stripes) -->
+  <path d="M 53 68 L 57 54 L 105 54 L 107 68 Z" fill="#34495E"/>
+  
+  <!-- White stripes on clapper stick -->
+  <rect x="62" y="54" width="6" height="14" fill="#ECF0F1" transform="skewX(-10)"/>
+  <rect x="73" y="54" width="6" height="14" fill="#ECF0F1" transform="skewX(-10)"/>
+  <rect x="84" y="54" width="6" height="14" fill="#ECF0F1" transform="skewX(-10)"/>
+  <rect x="95" y="54" width="6" height="14" fill="#ECF0F1" transform="skewX(-10)"/>
+  
+  <!-- Hinge circles -->
+  <circle cx="57" cy="68" r="3" fill="#95A5A6"/>
+  <circle cx="103" cy="68" r="3" fill="#95A5A6"/>
+  
+  <!-- Center line on board -->
+  <line x1="80" y1="68" x2="80" y2="96" stroke="#34495E" stroke-width="1.5"/>
+</svg>
