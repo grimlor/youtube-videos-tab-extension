@@ -1,6 +1,6 @@
 {
   "name": "youtube-videos-tab-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Chromium extension that automatically navigates to the Videos tab on YouTube channel pages",
   "scripts": {

@@ -26,6 +26,7 @@ A Chromium browser extension that automatically navigates to the Videos tab when
 
 - [Design Document](DESIGN.md) - Technical design and architecture
 - [BDD Testing Style Guide](BDD_TESTING_STYLE_GUIDE.md) - Testing guidelines
+- [Changelog](CHANGELOG.md) - Version history and release notes
 
 ## Quick Start
 
