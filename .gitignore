@@ -5,10 +5,6 @@ node_modules/
 dist/
 coverage/
 
-# Development/Collaboration
-.copilot/*
-!.copilot/README.md
-
 # OS Files
 .DS_Store
 Thumbs.db
@@ -30,3 +26,7 @@ Thumbs.db
 
 # Node modules (if we add build tooling later)
 node_modules/
+
+# Copilot work plans
+.copilot/*
+!.copilot/README.md
