@@ -19,7 +19,7 @@
     "chromium",
     "browser-extension"
   ],
-  "author": "Jack Pines (grimlor)",
+  "author": "Jack Pines",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.17.0",
