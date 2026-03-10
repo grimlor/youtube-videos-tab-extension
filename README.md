@@ -1,7 +1,8 @@
 # YouTube Auto Videos Tab Extension
 
 [![CI](https://github.com/grimlor/youtube-videos-tab-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/grimlor/youtube-videos-tab-extension/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/grimlor/youtube-videos-tab-extension/branch/master/graph/badge.svg)](https://codecov.io/gh/grimlor/youtube-videos-tab-extension)
+[![codecov](https://codecov.io/gh/grimlor/youtube-videos-tab-extension/branch/main/graph/badge.svg)](https://codecov.io/gh/grimlor/youtube-videos-tab-extension)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A Chromium browser extension that automatically navigates to the Videos tab when visiting YouTube channel pages. Built with **TypeScript** for type safety and maintainability.
 
