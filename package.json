@@ -4,8 +4,8 @@
   "type": "module",
   "description": "Chromium extension that automatically navigates to the Videos tab on YouTube channel pages",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
+    "build": "esbuild src/content.ts --bundle --format=iife --outfile=dist/content.js --target=es2020",
+    "build:watch": "esbuild src/content.ts --bundle --format=iife --outfile=dist/content.js --target=es2020 --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -34,6 +34,7 @@
     "@types/node": "^25.0.3",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
     "@typescript-eslint/parser": "^8.18.1",
+    "esbuild": "^0.27.3",
     "eslint": "^9.17.0",
     "globals": "^15.13.0",
     "husky": "^9.1.7",
