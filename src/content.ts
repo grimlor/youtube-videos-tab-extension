@@ -100,21 +100,15 @@ function switchToVideosTab(
   }
 }
 
-// Export for testing (only in Node.js environment)
-// @ts-expect-error - module is defined in Node.js/Jest environment
-// eslint-disable-next-line no-undef
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  // @ts-expect-error - module.exports is defined in Node.js/Jest environment
-  // eslint-disable-next-line no-undef
-  module.exports = {
-    isChannelMainPage,
-    isOnVideosTab,
-    clickVideosTab,
-    getVideosUrl,
-    navigateToVideosTab,
-    switchToVideosTab
-  };
-}
+// Named exports for testing
+export {
+  isChannelMainPage,
+  isOnVideosTab,
+  clickVideosTab,
+  getVideosUrl,
+  navigateToVideosTab,
+  switchToVideosTab,
+};
 
 // Browser extension execution (only runs in browser)
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
