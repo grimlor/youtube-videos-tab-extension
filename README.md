@@ -26,7 +26,7 @@ A Chromium browser extension that automatically navigates to the Videos tab when
 ## Documentation
 
 - [Design Document](DESIGN.md) - Technical design and architecture
-- [BDD Testing Style Guide](BDD_TESTING_STYLE_GUIDE.md) - Testing guidelines
+- [BDD Testing Skill](.github/skills/bdd-testing/SKILL.md) - Testing guidelines (synced from [universal-dev-skills](https://github.com/grimlor/universal-dev-skills))
 - [Changelog](CHANGELOG.md) - Version history and release notes
 
 ## Quick Start
@@ -77,7 +77,7 @@ npm run lint:fix      # Auto-fix linting issues
 ├── tsconfig.test.json          # TypeScript test configuration
 ├── icons/                      # Extension icons
 ├── DESIGN.md                   # Design documentation
-└── BDD_TESTING_STYLE_GUIDE.md  # Testing guidelines
+└── .github/skills/             # BDD testing & dev skills (synced)
 ```
 
 ## Tech Stack

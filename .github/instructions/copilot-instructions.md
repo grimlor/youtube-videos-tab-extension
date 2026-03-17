@@ -43,7 +43,7 @@ When assisting the developer, suggest creating files in `.copilot/` for:
 
 ### Testing Philosophy - CRITICAL
 
-**ALWAYS follow the BDD testing principles documented in [BDD_TESTING_STYLE_GUIDE.md](../../BDD_TESTING_STYLE_GUIDE.md):**
+**ALWAYS follow the BDD testing principles documented in [bdd-testing skill](../../.github/skills/bdd-testing/SKILL.md):**
 
 1. **Test Real Implementation** - Import and test actual functions from `src/`, never duplicate logic in tests
 2. **Given-When-Then Structure** - Organize all tests with clear Given/When/Then comments
@@ -52,7 +52,7 @@ When assisting the developer, suggest creating files in `.copilot/` for:
 5. **No Mocking Unless Necessary** - Test the real implementation; only mock external dependencies
 
 **Before creating or modifying tests:**
-- Read the BDD_TESTING_STYLE_GUIDE.md file
+- Read the bdd-testing skill in `.github/skills/bdd-testing/SKILL.md`
 - Follow the examples provided
 - Ensure tests import and call real implementation code
 - Use descriptive Given-When-Then comments
@@ -93,7 +93,7 @@ npm run lint:fix      # Auto-fix linting issues
 
 ### When Creating Tests
 
-1. **Read BDD_TESTING_STYLE_GUIDE.md first** if you haven't already
+1. **Read the bdd-testing skill first** (`.github/skills/bdd-testing/SKILL.md`) if you haven't already
 2. **Import real functions** from `src/` - never duplicate implementation in tests
 3. **Follow Given-When-Then** structure with clear comments
 4. **Use descriptive names**: `user_navigates_to_channel_format` not `test_regex_matching`
@@ -135,7 +135,7 @@ npm run lint:fix      # Auto-fix linting issues
 ## Critical Reminders
 
 1. ⚠️ **NEVER duplicate implementation in tests** - Always import from `src/`
-2. ⚠️ **ALWAYS follow BDD_TESTING_STYLE_GUIDE.md** for test structure and naming
+2. ⚠️ **ALWAYS follow the bdd-testing skill** (`.github/skills/bdd-testing/SKILL.md`) for test structure and naming
 3. ⚠️ **TypeScript strict mode** - No `any`, explicit types, proper return types
 4. ⚠️ **Test real code** - Black box testing of actual implementation
 5. ⚠️ **Use `.copilot/` for collaboration** - Keep work artifacts out of commits

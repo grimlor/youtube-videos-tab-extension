@@ -110,7 +110,7 @@ Possible selectors (YouTube's DOM structure):
 
 ## Testing Strategy
 
-See [BDD_TESTING_STYLE_GUIDE.md](BDD_TESTING_STYLE_GUIDE.md) for detailed testing guidelines following Behavior-Driven Development principles.
+See [BDD Testing Skill](.github/skills/bdd-testing/SKILL.md) for detailed testing guidelines following Behavior-Driven Development principles.
 
 ### Manual Testing Scenarios
 - Visit various channel URL formats

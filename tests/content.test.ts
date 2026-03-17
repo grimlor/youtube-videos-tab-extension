@@ -1,6 +1,6 @@
 /**
  * BDD Tests for YouTube Auto Videos Tab Extension
- * Following BDD_TESTING_STYLE_GUIDE.md principles
+ * Following .github/skills/bdd-testing/SKILL.md principles
  */
 
 import {
